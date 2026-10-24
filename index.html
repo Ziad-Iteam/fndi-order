@@ -171,7 +171,7 @@
   <section class="card hero">
     <div class="hero-ph"><img id="heroImg" alt="ترنجات روبست بكابيشون بتلات ألوان" width="900" height="1350" loading="eager" fetchpriority="high"></div>
     <div class="pad">
-      <h1>ترنجات روبست الأصلية · <span id="modelCount">٥</span> موديلات</h1>
+      <h1>ترنجات روبست الأصلية – <span id="modelCount">5</span> موديلات</h1>
       <div class="hero-price">من <b id="fromPrice"></b> جنيه</div>
       <div class="muted">ألوان كتير · مقاسات من L لحد 3XL · تقدر تطلب أكتر من قطعة</div>
       <button class="btn" type="button" id="heroGo" style="margin-top:12px">اختار موديلك</button>
@@ -504,7 +504,7 @@
     const c = S.cat, p = c.policy || {}, zones = c.delivery.zones;
     $("heroImg").src = c.hero;
     $("fromPrice").textContent = money(Math.min(...c.models.map(m => m.price)));
-    $("modelCount").textContent = String(c.models.length).replace(/\d/g, d => AR[d]);
+    $("modelCount").textContent = c.models.length;
     $("reassure").innerHTML = [
       p.exchange === "customer_pays_delivery" ? "🔁 لو المقاس مش مظبوط تقدر تبدّله، وبتدفع الشحن بس" : "",
       "📞 هنكلمك نأكد الطلب قبل الشحن",
