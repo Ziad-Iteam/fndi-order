@@ -148,6 +148,33 @@
   .ship { width: 100%; border-collapse: collapse; }
   .ship th { color: var(--sub); font-weight: 600; }
   .foot { text-align: center; color: var(--sub); font-size: 13px; padding: 16px; }
+
+  /* photo viewer: full, uncropped photos + video + details */
+  .ph { cursor: zoom-in; }
+  .ph .more-ph { position: absolute; top: 10px; inset-inline-start: 10px; background: rgba(0,0,0,.62); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 10px; border-radius: 16px; }
+  .linkbtn { display: block; width: 100%; min-height: 44px; border: 0; background: none; color: var(--wa); font-weight: 700; font-size: 15px; cursor: pointer; padding: 0 14px; }
+  .viewer { position: fixed; inset: 0; z-index: 60; background: #000; display: flex; flex-direction: column; }
+  .viewer[hidden] { display: none; }
+  .v-top { display: flex; align-items: center; gap: 10px; padding: 8px 10px; color: #fff; flex: none; }
+  .v-top button { width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.16); color: #fff; font-size: 20px; cursor: pointer; flex: none; }
+  .v-t { min-width: 0; } .v-t b { display: block; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .v-t span { font-size: 13px; color: #bbb; }
+  .v-strip { flex: 1 1 auto; min-height: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+  .v-strip::-webkit-scrollbar { display: none; }
+  .v-slide { flex: 0 0 100%; scroll-snap-align: center; position: relative; }
+  .v-slide img, .v-slide video { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .v-cap { position: absolute; bottom: 10px; inset-inline-start: 10px; background: rgba(0,0,0,.65); color: #fff; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 14px; }
+  .v-dots { display: flex; justify-content: center; gap: 4px; padding: 4px 0; flex: none; }
+  .v-dots button { width: 22px; height: 22px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; }
+  .v-dots button::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #666; }
+  .v-dots button.on::before { background: #fff; }
+  .v-dots .vid::before { width: 0; height: 0; border-radius: 0; background: none; border-style: solid; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent #666; }
+  .v-dots .vid.on::before { border-color: transparent transparent transparent #fff; background: none; }
+  .v-info { background: var(--card); border-radius: 16px 16px 0 0; padding: 12px 16px 0; max-height: 36vh; overflow: auto; flex: none; }
+  #vPick { position: sticky; bottom: 0; margin-bottom: 12px; box-shadow: 0 -10px 0 var(--card); }
+  .v-slide.vid .v-cap { top: 10px; bottom: auto; }
+  .v-info .price { font-size: 22px; }
+  .v-list { margin: 8px 0 12px; padding-inline-start: 18px; font-size: 14.5px; }
+  .v-list li { margin: 4px 0; }
 </style>
 </head>
 <body>
@@ -262,6 +289,17 @@
 </div>
 <div class="toast" id="toast"><div id="toastMsg"></div></div>
 
+<!-- ============ PHOTOS + DETAILS VIEWER ============ -->
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="صور الموديل وتفاصيله">
+  <div class="v-top">
+    <button type="button" id="vClose" aria-label="قفل">✕</button>
+    <div class="v-t"><b id="vTitle"></b><span id="vCount"></span></div>
+  </div>
+  <div class="v-strip" id="vStrip"></div>
+  <div class="v-dots" id="vDots"></div>
+  <div class="v-info" id="vInfo"></div>
+</div>
+
 <script>
 (() => {
   const $ = id => document.getElementById(id);
@@ -303,7 +341,12 @@
     if (push) history.pushState({ view }, "", view === "shop" ? location.pathname + location.search : "#" + view);
     window.scrollTo(0, 0);
   }
-  window.addEventListener("popstate", e => show((e.state && e.state.view) || "shop", false));
+  window.addEventListener("popstate", e => {
+    const st = e.state || {};
+    // Back from the photo viewer closes it and keeps the scroll position
+    if (V && !st.viewer) { closeViewer(); if ((st.view || "shop") === S.view) return; }
+    show(st.view || "shop", false);
+  });
   $("back").onclick = () => history.back();
 
   // Always one visible next step: before the first add, the bar points to the sizes
@@ -338,6 +381,7 @@
           <div class="incart" hidden></div>
         </div>
         <div class="post-a"><button class="btn add" type="button">ضيف للطلب</button></div>
+        <button class="linkbtn details" type="button">📷 شوف كل الصور${m.video ? " والفيديو" : ""} والتفاصيل</button>
         <div class="post-t muted">${m.blurb}</div>`;
       const ph = el.querySelector(".ph"), sw = el.querySelector(".sw"), sz = el.querySelector(".sz"), hint = el.querySelector(".hint"), add = el.querySelector(".add"), inc = el.querySelector(".incart");
       let viewed = false;
@@ -348,8 +392,14 @@
         ph.innerHTML = (pk.color.img
           ? `<img src="${pk.color.img}" alt="${m.title} – ${pk.color.ar}" ${eager} width="900" height="1350">`
           : `<div class="none">لسه ما صورناش اللون ${pk.color.ar}.<br>اطلب صورته على واتساب.</div>`)
-          + `<span class="badge">${money(m.price)} <small>جنيه</small></span>`;
+          + `<span class="badge">${money(m.price)} <small>جنيه</small></span>`
+          + (shots ? `<span class="more-ph">📷 ${shots === 1 ? "صورة" : shots === 2 ? "صورتين" : shots < 11 ? shots + " صور" : shots + " صورة"}${m.video ? " · 🎥 فيديو" : ""}</span>` : "");
       };
+      const shots = m.colors.reduce((a, c) => a + c.imgs.length, 0);
+      const openHere = () => { firstTap(); openViewer(m, pk, el); };
+      ph.onclick = openHere;
+      el.querySelector(".details").onclick = openHere;
+      el._pickColor = c => { pk.color = c; pk.size = null; colors(); sizes(); photo(); };
       const inCartLine = () => {
         const lines = S.cart.filter(i => i.model === m.model).map(i => `${i.color} ${i.size}${i.qty > 1 ? " ×" + i.qty : ""}`);
         inc.hidden = !lines.length; inc.textContent = "✓ في طلبك: " + lines.join("، ");
@@ -397,6 +447,68 @@
     });
   }
   const refreshFeed = () => document.querySelectorAll("#feed .card").forEach(c => c._refresh && c._refresh());
+
+  // ---------- viewer: every photo uncropped (selected color first), the real video, and the details ----------
+  let V = null;
+  function openViewer(m, pk, card) {
+    const order = [pk.color, ...m.colors.filter(c => c !== pk.color)];
+    const slides = order.flatMap(c => c.imgs.map(src => ({ src, color: c })));
+    if (m.video) slides.push({ video: m.video });
+    if (!slides.length) return;
+    V = { m, pk, card, slides, at: 0 };
+    $("vTitle").textContent = m.title;
+    $("vStrip").innerHTML = slides.map((s, i) => `<div class="v-slide${s.video ? " vid" : ""}" data-i="${i}">${s.video
+      ? `<video src="${s.video.src}" poster="${s.video.poster}" controls playsinline muted preload="none"></video><span class="v-cap">🎥 ${s.video.caption}</span>`
+      : `<img src="${s.src}" alt="${m.title} – ${s.color.ar}" ${i < 2 ? "" : `loading="lazy"`}><span class="v-cap">${s.color.ar}</span>`}</div>`).join("");
+    $("vDots").innerHTML = slides.map((s, i) => `<button type="button" class="${s.video ? "vid" : ""}" aria-label="${s.video ? "الفيديو" : "صورة " + (i + 1)}" data-i="${i}"></button>`).join("");
+    $("vDots").querySelectorAll("button").forEach(b => b.onclick = () => $("vStrip").children[b.dataset.i].scrollIntoView({ inline: "center", block: "nearest" }));
+    $("viewer").hidden = false; document.body.style.overflow = "hidden";
+    $("vStrip").scrollLeft = 0;
+    setSlide(0);
+    history.pushState({ view: S.view, viewer: true }, "", "#photos");
+  }
+  function setSlide(i) {
+    if (!V) return;
+    V.at = i;
+    const s = V.slides[i], c = s.color || V.pk.color;
+    $("vCount").textContent = s.video ? "فيديو" : `صورة ${i + 1} من ${V.slides.filter(x => !x.video).length}`;
+    $("vDots").querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === i));
+    $("vStrip").querySelectorAll("video").forEach(v => { if (!s.video) v.pause(); });
+    const m = V.m, p = S.cat.policy || {}, sizesLeft = c.sizes.filter(z => z.available).map(z => z.size);
+    $("vInfo").innerHTML = `
+      <div class="price">${money(m.price)} <small>جنيه</small></div>
+      <b>${m.title}</b><div class="muted">موديل ${m.model} · روبست</div>
+      <ul class="v-list">
+        <li>${m.blurb}</li>
+        ${m.fabric ? `<li>الخامة: ${m.fabric.replace(/^خامة\s*/, "")}</li>` : ""}
+        <li>الألوان: ${m.colors.map(x => x === c ? `<b>${x.ar}</b>` : x.ar).join("، ")}</li>
+        <li>${sizesLeft.length ? `المقاسات المتاحة في ${c.ar}: <b dir="ltr">${sizesLeft.join(" · ")}</b>` : `اللون ${c.ar} خلص`}</li>
+        <li>الدفع كاش للمندوب${p.open_before_pay ? " · افتح وشوف قبل ما تدفع" : ""}</li>
+      </ul>
+      <button class="btn" type="button" id="vPick" ${sizesLeft.length ? "" : "disabled"}>اختار مقاس ${c.ar} وضيفه للطلب</button>`;
+    $("vPick").onclick = () => {
+      const card = V.card;
+      if (V.pk.color !== c) card._pickColor(c);
+      history.back();
+      setTimeout(() => card.querySelector(".sz").scrollIntoView({ block: "center", behavior: "smooth" }), 60);
+    };
+  }
+  function closeViewer() {
+    if (!V) return;
+    $("vStrip").querySelectorAll("video").forEach(v => v.pause());
+    $("viewer").hidden = true; document.body.style.overflow = "";
+    $("vStrip").innerHTML = ""; V = null;
+  }
+  $("vClose").onclick = () => history.back();
+  // The strip is RTL, so scrollLeft runs 0 → negative; its absolute value / width is the slide number
+  let slideTimer;
+  $("vStrip").addEventListener("scroll", () => {
+    clearTimeout(slideTimer);
+    slideTimer = setTimeout(() => {
+      const st = $("vStrip"), i = Math.round(Math.abs(st.scrollLeft) / st.clientWidth);
+      if (V && i !== V.at && i < V.slides.length) setSlide(i);
+    }, 80);
+  }, { passive: true });
 
   // ---------- checkout ----------
   function items() {

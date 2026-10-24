@@ -79,13 +79,22 @@
       "blurb": "ياقة واقفة، علامة III على الصدر والكم، طباعة ROBUST ORIGINAL BRAND، وبايبنج عاكس على الكم. بنطلون مستقيم.",
       "price": 2510,
       "badge": "ترشيحنا",
+      "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-30-1518-CBFB51.jpg",
+      "video": {
+        "src": "img/v-25063.mp4",
+        "poster": "img/v-25063.jpg",
+        "caption": "فيديو حقيقي للموديل: علامة III والسوستة"
+      },
       "colors": [
         {
           "sku": "FNDI-25063-BST",
           "key": "Bastage",
           "ar": "لبني",
           "img": "img/bilal-30-1518-CBFB51.jpg",
+          "imgs": [
+            "img/bilal-30-1518-CBFB51.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -114,6 +123,9 @@
           "key": "Iron",
           "ar": "رمادي فحمي",
           "img": "img/bilal-29-1518-326D69.jpg",
+          "imgs": [
+            "img/bilal-29-1518-326D69.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -142,6 +154,10 @@
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-28-1518-430FD2.jpg",
+          "imgs": [
+            "img/bilal-28-1518-430FD2.jpg",
+            "img/bilal-27-1518-430FD2.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -174,13 +190,19 @@
       "blurb": "جاكيت بسوستة وكابيشون، ألوان مقسومة بخط أبيض على الصدر، بنطلون جوجر بأستك عند الرجل.",
       "price": 2295,
       "badge": null,
+      "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-06-1517-D7C1-4.jpg",
+      "video": null,
       "colors": [
         {
           "sku": "FNDI-25047-OLV",
           "key": "Olive / Black",
           "ar": "زيتي × أسود",
           "img": "img/bilal-03-1517-D7C1-4.jpg",
+          "imgs": [
+            "img/bilal-03-1517-D7C1-4.jpg",
+            "img/bilal-06-1517-D7C1-4.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -209,6 +231,10 @@
           "key": "Burgundy / Navy",
           "ar": "نبيتي × كحلي",
           "img": "img/bilal-04-1517-D7C1-4.jpg",
+          "imgs": [
+            "img/bilal-04-1517-D7C1-4.jpg",
+            "img/bilal-06-1517-D7C1-4.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -237,6 +263,10 @@
           "key": "Teal / Gray",
           "ar": "بترولي × رمادي",
           "img": "img/bilal-05-1517-D7C1-4.jpg",
+          "imgs": [
+            "img/bilal-05-1517-D7C1-4.jpg",
+            "img/bilal-06-1517-D7C1-4.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -269,13 +299,22 @@
       "blurb": "جاكيت راجلان بياقة عالية، بانل لون على الصدر و٣ خطوط على الكتف، وخطوط مطابقة على البنطلون.",
       "price": 2230,
       "badge": null,
+      "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-24-1511-592255.jpg",
+      "video": {
+        "src": "img/v-25069.mp4",
+        "poster": "img/v-25069.jpg",
+        "caption": "فيديو حقيقي للموديل: البانل والخطوط"
+      },
       "colors": [
         {
           "sku": "FNDI-25069-NVY",
           "key": "Navy",
           "ar": "كحلي × سماوي",
           "img": "img/bilal-24-1511-592255.jpg",
+          "imgs": [
+            "img/bilal-24-1511-592255.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -304,6 +343,9 @@
           "key": "Blue",
           "ar": "أزرق درجتين",
           "img": "img/bilal-25-1511-C261D8.jpg",
+          "imgs": [
+            "img/bilal-25-1511-C261D8.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -332,6 +374,9 @@
           "key": "Black",
           "ar": "أسود × رمادي",
           "img": "img/bilal-26-1511-60DE0D.jpg",
+          "imgs": [
+            "img/bilal-26-1511-60DE0D.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -364,13 +409,22 @@
       "blurb": "ياقة واقفة، لوجو ROBUST مطرّز على الصدر، شريط مقلّم على الكم وجنب البنطلون، جوجر بأستك.",
       "price": 2295,
       "badge": null,
+      "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-11-1520-473D-4.jpg",
+      "video": {
+        "src": "img/v-25034.mp4",
+        "poster": "img/v-25034.jpg",
+        "caption": "فيديو حقيقي للموديل: الشريط المقلّم واللوجو المطرّز"
+      },
       "colors": [
         {
           "sku": "FNDI-25034-BLK",
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-11-1520-473D-4.jpg",
+          "imgs": [
+            "img/bilal-11-1520-473D-4.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -399,6 +453,9 @@
           "key": "D Gray",
           "ar": "رمادي",
           "img": "img/bilal-14-1520-473D-4.jpg",
+          "imgs": [
+            "img/bilal-14-1520-473D-4.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -426,7 +483,11 @@
           "sku": "FNDI-25034-PET",
           "key": "Petroleum",
           "ar": "كحلي بترولي",
-          "img": null,
+          "img": "img/25034-pet-1.webp",
+          "imgs": [
+            "img/25034-pet-1.webp",
+            "img/25034-pet-2.webp"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -459,13 +520,22 @@
       "blurb": "جاكيت فارسيتي بزراير كبس وأطراف ريب مقلّمة، بنطلون مستقيم.",
       "price": 2295,
       "badge": null,
+      "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-33-1609-1C65E0.jpg",
+      "video": {
+        "src": "img/v-25037.mp4",
+        "poster": "img/v-25037.jpg",
+        "caption": "فيديو حقيقي للموديل وهو ملبوس"
+      },
       "colors": [
         {
           "sku": "FNDI-25037-BLK",
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-33-1609-1C65E0.jpg",
+          "imgs": [
+            "img/bilal-33-1609-1C65E0.jpg"
+          ],
           "sizes": [
             {
               "size": "L",
@@ -493,7 +563,10 @@
           "sku": "FNDI-25037-OLV",
           "key": "Olive",
           "ar": "زيتي",
-          "img": null,
+          "img": "img/25037-olv-1.webp",
+          "imgs": [
+            "img/25037-olv-1.webp"
+          ],
           "sizes": [
             {
               "size": "L",
