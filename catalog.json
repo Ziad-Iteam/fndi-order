@@ -1,0 +1,508 @@
+{
+  "store": {
+    "name": "FNDI",
+    "city": "العجمي – الإسكندرية",
+    "sizes": [
+      "L",
+      "XL",
+      "XXL",
+      "3XL"
+    ],
+    "fabric": "خامة سوفت مبطّنة فولار مستورد"
+  },
+  "whatsapp": "201503167183",
+  "delivery": {
+    "zones": [
+      {
+        "fee": 75,
+        "label": "الإسكندرية والقاهرة والجيزة والدلتا والقناة",
+        "days": "٢–٣ أيام عمل",
+        "govs": [
+          "الإسكندرية",
+          "القاهرة",
+          "الجيزة",
+          "البحيرة",
+          "الدقهلية",
+          "الغربية",
+          "المنوفية",
+          "القليوبية",
+          "الشرقية",
+          "كفر الشيخ",
+          "دمياط",
+          "بورسعيد",
+          "الإسماعيلية",
+          "السويس"
+        ]
+      },
+      {
+        "fee": 90,
+        "label": "الصعيد والبحر الأحمر وسيناء ومطروح والوادي الجديد",
+        "days": "٣–٥ أيام عمل",
+        "govs": [
+          "الفيوم",
+          "بني سويف",
+          "المنيا",
+          "أسيوط",
+          "سوهاج",
+          "قنا",
+          "الأقصر",
+          "أسوان",
+          "البحر الأحمر",
+          "مطروح",
+          "الوادي الجديد",
+          "شمال سيناء",
+          "جنوب سيناء"
+        ]
+      }
+    ]
+  },
+  "policy": {
+    "open_before_pay": true,
+    "free_first_exchange": false
+  },
+  "shop": {
+    "address": "العجمي – خير الله، قبل بيت الجملة أمام بيتزا دودي",
+    "hours": "مفتوحين كل يوم من ١٢ الظهر لـ ١٢ بالليل",
+    "map_url": null,
+    "owner_note": null
+  },
+  "size_guide": null,
+  "hero": "img/bilal-30-1518-CBFB51.jpg",
+  "meta_pixel_id": null,
+  "draft": false,
+  "models": [
+    {
+      "model": "25063",
+      "title": "ترنج روبست سوفت – ياقة عالية III",
+      "blurb": "ياقة واقفة، علامة III على الصدر والكم، طباعة ROBUST ORIGINAL BRAND، وبايبنج عاكس على الكم. بنطلون مستقيم.",
+      "price": 2510,
+      "badge": "ترشيحنا",
+      "hero": "img/bilal-28-1518-430FD2.jpg",
+      "colors": [
+        {
+          "key": "Black",
+          "ar": "أسود",
+          "img": "img/bilal-28-1518-430FD2.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Iron",
+          "ar": "رمادي فحمي",
+          "img": "img/bilal-29-1518-326D69.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Bastage",
+          "ar": "لبني",
+          "img": "img/bilal-30-1518-CBFB51.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        }
+      ],
+      "available": true
+    },
+    {
+      "model": "25047",
+      "title": "ترنج روبست سوفت بكابيشون – شيفرون أبيض",
+      "blurb": "جاكيت بسوستة وكابيشون، ألوان مقسومة بخط أبيض على الصدر، بنطلون جوجر بأستك عند الرجل.",
+      "price": 2295,
+      "badge": null,
+      "hero": "img/bilal-06-1517-D7C1-4.jpg",
+      "colors": [
+        {
+          "key": "Olive / Black",
+          "ar": "زيتي × أسود",
+          "img": "img/bilal-03-1517-D7C1-4.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Burgundy / Navy",
+          "ar": "نبيتي × كحلي",
+          "img": "img/bilal-04-1517-D7C1-4.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Teal / Gray",
+          "ar": "بترولي × رمادي",
+          "img": "img/bilal-05-1517-D7C1-4.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        }
+      ],
+      "available": true
+    },
+    {
+      "model": "25069",
+      "title": "ترنج روبست سوفت – بانل صدر وخطوط كتف",
+      "blurb": "جاكيت راجلان بياقة عالية، بانل لون على الصدر و٣ خطوط على الكتف، وخطوط مطابقة على البنطلون.",
+      "price": 2230,
+      "badge": null,
+      "hero": "img/bilal-24-1511-592255.jpg",
+      "colors": [
+        {
+          "key": "Navy",
+          "ar": "كحلي × سماوي",
+          "img": "img/bilal-24-1511-592255.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Blue",
+          "ar": "أزرق درجتين",
+          "img": "img/bilal-25-1511-C261D8.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Black",
+          "ar": "أسود × رمادي",
+          "img": "img/bilal-26-1511-60DE0D.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        }
+      ],
+      "available": true
+    },
+    {
+      "model": "25034",
+      "title": "ترنج روبست سوفت – شريط مقلّم جانبي",
+      "blurb": "ياقة واقفة، لوجو ROBUST مطرّز على الصدر، شريط مقلّم على الكم وجنب البنطلون، جوجر بأستك.",
+      "price": 2295,
+      "badge": null,
+      "hero": "img/bilal-11-1520-473D-4.jpg",
+      "colors": [
+        {
+          "key": "Black",
+          "ar": "أسود",
+          "img": "img/bilal-11-1520-473D-4.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "D Gray",
+          "ar": "رمادي",
+          "img": "img/bilal-14-1520-473D-4.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "key": "Petroleum",
+          "ar": "كحلي بترولي",
+          "img": null,
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 1
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 1
+            }
+          ]
+        }
+      ],
+      "available": true
+    },
+    {
+      "model": "25037",
+      "title": "ترنج روبست فارسيتي – بومبر بزراير",
+      "blurb": "جاكيت فارسيتي بزراير كبس وأطراف ريب مقلّمة، بنطلون مستقيم.",
+      "price": 2295,
+      "badge": null,
+      "hero": "img/bilal-33-1609-1C65E0.jpg",
+      "colors": [
+        {
+          "key": "Black",
+          "ar": "أسود",
+          "img": "img/bilal-33-1609-1C65E0.jpg",
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 2
+            }
+          ]
+        },
+        {
+          "key": "Olive",
+          "ar": "زيتي",
+          "img": null,
+          "sizes": [
+            {
+              "size": "L",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "XL",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "XXL",
+              "available": true,
+              "qty": 2
+            },
+            {
+              "size": "3XL",
+              "available": true,
+              "qty": 2
+            }
+          ]
+        }
+      ],
+      "available": true
+    }
+  ]
+}
