@@ -58,7 +58,8 @@
   },
   "policy": {
     "open_before_pay": true,
-    "free_first_exchange": false
+    "free_first_exchange": false,
+    "exchange": "customer_pays_delivery"
   },
   "shop": {
     "address": "العجمي – خير الله، قبل بيت الجملة أمام بيتزا دودي",
