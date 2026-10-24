@@ -79,13 +79,13 @@
       "blurb": "ياقة واقفة، علامة III على الصدر والكم، طباعة ROBUST ORIGINAL BRAND، وبايبنج عاكس على الكم. بنطلون مستقيم.",
       "price": 2510,
       "badge": "ترشيحنا",
-      "hero": "img/bilal-28-1518-430FD2.jpg",
+      "hero": "img/bilal-30-1518-CBFB51.jpg",
       "colors": [
         {
-          "sku": "FNDI-25063-BLK",
-          "key": "Black",
-          "ar": "أسود",
-          "img": "img/bilal-28-1518-430FD2.jpg",
+          "sku": "FNDI-25063-BST",
+          "key": "Bastage",
+          "ar": "لبني",
+          "img": "img/bilal-30-1518-CBFB51.jpg",
           "sizes": [
             {
               "size": "L",
@@ -138,10 +138,10 @@
           ]
         },
         {
-          "sku": "FNDI-25063-BST",
-          "key": "Bastage",
-          "ar": "لبني",
-          "img": "img/bilal-30-1518-CBFB51.jpg",
+          "sku": "FNDI-25063-BLK",
+          "key": "Black",
+          "ar": "أسود",
+          "img": "img/bilal-28-1518-430FD2.jpg",
           "sizes": [
             {
               "size": "L",
