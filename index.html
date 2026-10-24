@@ -233,7 +233,8 @@
     </form>
     <div class="done box" id="done" role="status">
       <h3>واتساب اتفتح برسالة الطلب</h3>
-      <p>اضغط «إرسال» في واتساب عشان الطلب يوصلنا. رقم الطلب: <b id="doneId"></b></p>
+      <p id="doneSaved" hidden>طلبك اتسجّل عندنا ✓</p>
+      <p>اضغط «إرسال» في واتساب عشان نأكد معاك بسرعة. رقم الطلب: <b id="doneId"></b></p>
       <p class="fine">واتساب ما اتفتحش؟ <a id="doneLink" href="#">اضغط هنا</a></p>
     </div>
   </section>
@@ -266,7 +267,9 @@
   const S = { cat: null, pick: {}, chosen: null };
 
   const waLink = text => "https://wa.me/" + S.cat.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
-  const track = (ev, p) => { if (window.fbq) window.fbq("track", ev, p || {}); };
+  // eventID lets a later server-side (Conversions API) event for the same order be de-duplicated by Meta
+  const track = (ev, p, eventID) => { if (window.fbq) window.fbq("track", ev, p || {}, eventID ? { eventID } : undefined); };
+  const viewed = new Set();
   function loadPixel(id) {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
     fbq("init", id); fbq("track", "PageView");
@@ -347,7 +350,10 @@
           b.type = "button"; b.textContent = s.size; b.disabled = !s.available;
           b.setAttribute("aria-pressed", String(pk.size === s.size));
           if (!s.available) b.setAttribute("aria-label", `${s.size} خلص`);
-          b.onclick = () => { pk.size = s.size; sizes(); };
+          b.onclick = () => {
+            pk.size = s.size; sizes();
+            if (!viewed.has(m.model)) { viewed.add(m.model); track("ViewContent", { content_ids: [pk.color.sku], content_type: "product", value: m.price, currency: "EGP" }); }
+          };
           sz.append(b);
         }
         go.disabled = !pk.size || !m.available;
@@ -373,7 +379,7 @@
       go.onclick = () => {
         S.chosen = { m, color: pk.color, size: pk.size };
         summary();
-        track("InitiateCheckout", { content_ids: [m.model], value: m.price, currency: "EGP" });
+        track("InitiateCheckout", { content_ids: [pk.color.sku], content_type: "product", value: m.price, currency: "EGP" });
         $("order").scrollIntoView();
       };
       colors(); sizes(); photo();
@@ -444,14 +450,42 @@
       S.cat.policy?.open_before_pay ? "معاينة قبل الدفع" : null,
     ].filter(Boolean);
     const link = waLink(lines.join("\n"));
-    track("Lead", { content_ids: [c.m.model], value: sub, currency: "EGP" });
-    $("doneId").textContent = id;
-    $("doneLink").href = link;
-    $("form").hidden = true;
-    $("done").classList.add("show");
-    $("sticky").classList.remove("show");
-    // ?test leaves the page in place so the generated message can be checked without opening WhatsApp
-    if (!new URLSearchParams(location.search).has("test")) location.href = link;
+    const order = {
+      order_id: id, sku: c.color.sku, model: c.m.model, color: c.color.ar, size: c.size, qty,
+      price_egp: sub, delivery_fee_egp: z.fee, total_egp: sub + z.fee,
+      name, phone, phone2, governorate: gov, area, address: addr, notes: $("notes").value.trim(), source: location.hostname,
+    };
+    const btn = $("form").querySelector("button[type=submit]");
+    btn.disabled = true; btn.textContent = "بنسجّل طلبك…";
+    saveOrder(order).then(saved => {
+      track("Lead", { content_ids: [c.color.sku], content_type: "product", value: sub + z.fee, currency: "EGP" }, id);
+      $("doneId").textContent = id;
+      $("doneSaved").hidden = !saved;
+      $("doneLink").href = link;
+      $("form").hidden = true;
+      $("done").classList.add("show");
+      $("sticky").classList.remove("show");
+      // ?test leaves the page in place so the generated message can be checked without opening WhatsApp
+      if (!new URLSearchParams(location.search).has("test")) location.href = link;
+    });
+  }
+
+  // Records the order in the owner's sheet before WhatsApp opens. Never blocks the order:
+  // with no endpoint, a network error or a timeout, it resolves false and WhatsApp still opens.
+  async function saveOrder(order) {
+    const url = S.cat.order_endpoint;
+    if (!url) return false;
+    const ctl = new AbortController();
+    const timer = setTimeout(() => ctl.abort(), 8000);
+    try {
+      const r = await fetch(url, { method: "POST", body: JSON.stringify(order), headers: { "Content-Type": "text/plain;charset=utf-8" }, signal: ctl.signal });
+      const j = await r.json();
+      return j.ok === true;
+    } catch (e) {
+      return false;
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   fetch("catalog.json", { cache: "no-store" }).then(r => r.json()).then(cat => {

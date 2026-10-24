@@ -69,7 +69,8 @@
   },
   "size_guide": null,
   "hero": "img/bilal-30-1518-CBFB51.jpg",
-  "meta_pixel_id": null,
+  "meta_pixel_id": "1452835799541614",
+  "order_endpoint": "https://script.google.com/macros/s/AKfycbzDgFWm2XTSH_CUHOGLEQlHKgOFOmA-JqpeUuxlZsFQzyMmqyQSkm-WpsIjE7rSOUwKSg/exec",
   "draft": false,
   "models": [
     {
@@ -81,6 +82,7 @@
       "hero": "img/bilal-28-1518-430FD2.jpg",
       "colors": [
         {
+          "sku": "FNDI-25063-BLK",
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-28-1518-430FD2.jpg",
@@ -108,6 +110,7 @@
           ]
         },
         {
+          "sku": "FNDI-25063-IRN",
           "key": "Iron",
           "ar": "رمادي فحمي",
           "img": "img/bilal-29-1518-326D69.jpg",
@@ -135,6 +138,7 @@
           ]
         },
         {
+          "sku": "FNDI-25063-BST",
           "key": "Bastage",
           "ar": "لبني",
           "img": "img/bilal-30-1518-CBFB51.jpg",
@@ -173,6 +177,7 @@
       "hero": "img/bilal-06-1517-D7C1-4.jpg",
       "colors": [
         {
+          "sku": "FNDI-25047-OLV",
           "key": "Olive / Black",
           "ar": "زيتي × أسود",
           "img": "img/bilal-03-1517-D7C1-4.jpg",
@@ -200,6 +205,7 @@
           ]
         },
         {
+          "sku": "FNDI-25047-BUR",
           "key": "Burgundy / Navy",
           "ar": "نبيتي × كحلي",
           "img": "img/bilal-04-1517-D7C1-4.jpg",
@@ -227,6 +233,7 @@
           ]
         },
         {
+          "sku": "FNDI-25047-TEA",
           "key": "Teal / Gray",
           "ar": "بترولي × رمادي",
           "img": "img/bilal-05-1517-D7C1-4.jpg",
@@ -265,6 +272,7 @@
       "hero": "img/bilal-24-1511-592255.jpg",
       "colors": [
         {
+          "sku": "FNDI-25069-NVY",
           "key": "Navy",
           "ar": "كحلي × سماوي",
           "img": "img/bilal-24-1511-592255.jpg",
@@ -292,6 +300,7 @@
           ]
         },
         {
+          "sku": "FNDI-25069-BLU",
           "key": "Blue",
           "ar": "أزرق درجتين",
           "img": "img/bilal-25-1511-C261D8.jpg",
@@ -319,6 +328,7 @@
           ]
         },
         {
+          "sku": "FNDI-25069-BLK",
           "key": "Black",
           "ar": "أسود × رمادي",
           "img": "img/bilal-26-1511-60DE0D.jpg",
@@ -357,6 +367,7 @@
       "hero": "img/bilal-11-1520-473D-4.jpg",
       "colors": [
         {
+          "sku": "FNDI-25034-BLK",
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-11-1520-473D-4.jpg",
@@ -384,6 +395,7 @@
           ]
         },
         {
+          "sku": "FNDI-25034-DGR",
           "key": "D Gray",
           "ar": "رمادي",
           "img": "img/bilal-14-1520-473D-4.jpg",
@@ -411,6 +423,7 @@
           ]
         },
         {
+          "sku": "FNDI-25034-PET",
           "key": "Petroleum",
           "ar": "كحلي بترولي",
           "img": null,
@@ -449,6 +462,7 @@
       "hero": "img/bilal-33-1609-1C65E0.jpg",
       "colors": [
         {
+          "sku": "FNDI-25037-BLK",
           "key": "Black",
           "ar": "أسود",
           "img": "img/bilal-33-1609-1C65E0.jpg",
@@ -476,6 +490,7 @@
           ]
         },
         {
+          "sku": "FNDI-25037-OLV",
           "key": "Olive",
           "ar": "زيتي",
           "img": null,
