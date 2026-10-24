@@ -40,9 +40,16 @@
   .pad { padding: 12px 14px; }
   .muted { color: var(--sub); font-size: 14px; }
 
-  /* Trust strip */
+  /* Hero + trust */
+  .hero-ph { background: #DADDE1; aspect-ratio: 16 / 11; overflow: hidden; }
+  .hero-ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero h1 { font-size: 21px; line-height: 1.35; margin: 0 0 4px; }
+  .hero-price { font-size: 17px; margin-bottom: 2px; }
+  .hero-price b { font-size: 24px; color: var(--wa); }
   .trust { display: grid; gap: 10px; }
   .trust div { display: flex; gap: 10px; align-items: center; font-size: 15px; font-weight: 600; }
+  .trust.mini { grid-template-columns: repeat(3, 1fr); gap: 6px; border-top: 1px solid var(--line); padding: 10px 8px; }
+  .trust.mini div { flex-direction: column; text-align: center; font-size: 12.5px; line-height: 1.3; gap: 4px; }
   .ico { width: 34px; height: 34px; border-radius: 50%; background: var(--wa-soft); color: var(--wa); display: grid; place-items: center; flex: none; font-size: 18px; }
 
   /* Product post */
@@ -51,8 +58,10 @@
   .post-h b { display: block; font-size: 15px; }
   .post-h span { font-size: 13px; color: var(--sub); }
   .post-t { padding: 0 14px 10px; }
-  .ph { position: relative; background: #DADDE1; aspect-ratio: 4 / 5; }
-  .ph img { width: 100%; height: 100%; object-fit: cover; }
+  .ph { position: relative; background: #DADDE1; aspect-ratio: 4 / 5; max-height: 38vh; width: 100%; overflow: hidden; }
+  .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+  .badge { position: absolute; bottom: 10px; inset-inline-end: 10px; background: rgba(0,0,0,.72); color: #fff; font-weight: 800; font-size: 18px; padding: 4px 12px; border-radius: 18px; }
+  .badge small { font-size: 13px; font-weight: 600; }
   .ph .none { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; color: var(--sub); }
   .price { font-size: 24px; font-weight: 800; }
   .price small { font-size: 15px; font-weight: 600; color: var(--sub); }
@@ -60,9 +69,9 @@
   .lbl { font-size: 14px; color: var(--sub); margin: 12px 0 6px; }
   .lbl b { color: var(--ink); }
   .sw { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
-  .sw button { flex: none; width: 60px; border: 2px solid var(--line); border-radius: 10px; background: #fff; padding: 0; cursor: pointer; overflow: hidden; }
+  .sw button { flex: none; width: 52px; border: 2px solid var(--line); border-radius: 10px; background: #fff; padding: 0; cursor: pointer; overflow: hidden; }
   .sw button img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-  .sw button span { display: block; font-size: 11px; line-height: 1.25; padding: 3px 2px; color: var(--sub); }
+  .sw button span { display: block; font-size: 11px; line-height: 1.25; padding: 3px 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--sub); }
   .sw button .noimg { aspect-ratio: 3 / 4; display: grid; place-items: center; background: #F0F2F5; font-size: 11px; color: var(--sub); }
   .sw button[aria-pressed="true"] { border-color: var(--wa); box-shadow: 0 0 0 1px var(--wa); }
   .sz { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -71,7 +80,8 @@
   .sz button:disabled { color: #BCC0C4; text-decoration: line-through; cursor: not-allowed; background: #F7F8FA; }
   .hint { color: var(--err); font-size: 14px; font-weight: 600; margin-top: 6px; }
   .incart { margin-top: 8px; font-size: 14px; color: var(--wa); font-weight: 600; }
-  .sizehelp { font-size: 14px; }
+  .lbl.row { align-items: center; }
+  .szhelp { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--wa-soft); color: var(--wa); font-weight: 700; font-size: 14px; text-decoration: none; }
 
   .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 50px; border: 0; border-radius: 10px; background: var(--wa); color: #fff; font-weight: 800; font-size: 17px; cursor: pointer; text-decoration: none; }
   .btn:active { background: var(--wa-dark); }
@@ -119,6 +129,7 @@
 
   .totals div { display: flex; justify-content: space-between; padding: 4px 0; }
   .totals .t { font-size: 19px; font-weight: 800; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 10px; }
+  .reassure { margin: 10px 0 12px; font-size: 14px; color: var(--sub); display: grid; gap: 4px; }
   .bubble { background: var(--bubble); border-radius: 10px 10px 2px 10px; padding: 10px 12px; font-size: 15px; position: relative; }
   .bubble .tk { color: var(--tick); font-size: 13px; font-weight: 700; }
 
@@ -157,15 +168,19 @@
 
 <!-- ============ SHOP VIEW ============ -->
 <main id="shop" class="wrap">
-  <section class="card pad trust" aria-label="مميزات">
-    <div><span class="ico">💵</span>الدفع كاش للمندوب لما الطلب يوصلك</div>
-    <div id="trustOpen"><span class="ico">📦</span>افتح الشحنة وشوف الترنج قبل ما تدفع</div>
-    <div><span class="ico">🚚</span><span id="trustShip">شحن لكل المحافظات</span></div>
-  </section>
-
-  <section class="card pad">
-    <div class="row"><b style="font-size:17px">اختار الموديل واللون والمقاس</b></div>
-    <div class="muted">تقدر تضيف أكتر من قطعة لنفس الطلب. المقاسات من L لحد 3XL.</div>
+  <section class="card hero">
+    <div class="hero-ph"><img id="heroImg" alt="ترنجات روبست بكابيشون بتلات ألوان" width="900" height="1350" loading="eager" fetchpriority="high"></div>
+    <div class="pad">
+      <h1>ترنجات روبست الأصلية · <span id="modelCount">٥</span> موديلات</h1>
+      <div class="hero-price">من <b id="fromPrice"></b> جنيه</div>
+      <div class="muted">ألوان كتير · مقاسات من L لحد 3XL · تقدر تطلب أكتر من قطعة</div>
+      <button class="btn" type="button" id="heroGo" style="margin-top:12px">اختار موديلك</button>
+    </div>
+    <div class="trust mini">
+      <div><span class="ico">💵</span>الدفع كاش للمندوب</div>
+      <div id="trustOpen"><span class="ico">📦</span>افتح وشوف قبل ما تدفع</div>
+      <div><span class="ico">🚚</span><span id="trustShip">شحن لكل المحافظات</span></div>
+    </div>
   </section>
 
   <div id="feed"></div>
@@ -212,6 +227,7 @@
     <button class="more" type="button" id="showNotes">+ ضيف ملاحظة</button>
 
     <div class="totals" id="totals"></div>
+    <div class="reassure" id="reassure"></div>
     <div class="bubble" style="margin:12px 0">
       الدفع كاش للمندوب لما الطلب يوصلك<span id="bubbleOpen">، وتقدر تفتح الشحنة وتشوف الترنج قبل ما تدفع</span>. هنكلمك نأكد الطلب قبل الشحن. <span class="tk">✓✓</span>
     </div>
@@ -290,39 +306,49 @@
   window.addEventListener("popstate", e => show((e.state && e.state.view) || "shop", false));
   $("back").onclick = () => history.back();
 
+  // Always one visible next step: before the first add, the bar points to the sizes
   function updateBar() {
     const n = pieces();
-    $("bar").hidden = S.view !== "shop" || n === 0;
-    $("barCount").textContent = "طلبك: " + arPieces(n);
-    $("barTotal").textContent = money(subtotal()) + " جنيه + الشحن";
+    $("bar").hidden = S.view !== "shop";
+    $("barCount").textContent = n ? "طلبك: " + arPieces(n) : "اختار مقاسك وضيفه للطلب";
+    $("barTotal").textContent = n ? money(subtotal()) + " جنيه + الشحن" : "الدفع كاش عند الاستلام";
+    $("barGo").textContent = n ? "كمّل الطلب" : "اختار ↓";
+    $("barGo").classList.toggle("ghost", !n);
   }
+  function goToModels() {
+    const first = document.querySelector("#feed .card .ph");
+    if (first) window.scrollTo({ top: first.getBoundingClientRect().top + scrollY - 66, behavior: "smooth" });
+  }
+  $("heroGo").onclick = goToModels;
 
   // ---------- shop ----------
   function feed() {
     const box = $("feed"); box.innerHTML = "";
-    for (const m of S.cat.models) {
+    S.cat.models.forEach((m, index) => {
       const pk = S.pick[m.model] = S.pick[m.model] || { color: m.colors.find(c => c.sizes.some(s => s.available)) || m.colors[0], size: null };
       const el = document.createElement("article");
       el.className = "card";
       el.innerHTML = `
         <div class="post-h"><div class="avatar">FNDI</div><div><b>${m.title}</b><span>موديل ${m.model} · روبست</span></div></div>
-        <div class="post-t">${m.blurb}</div>
         <div class="ph"></div>
         <div class="pad">
-          <div class="row"><div class="price">${money(m.price)} <small>جنيه</small></div><a class="sizehelp" href="#sizeCard">مقاسي إيه؟</a></div>
           <div class="lbl">اللون: <b class="cn"></b></div><div class="sw"></div>
-          <div class="lbl">المقاس</div><div class="sz"></div>
+          <div class="lbl row"><span>المقاس</span><a class="szhelp" href="${waLink(`عايز أعرف مقاسي في ترنج روبست موديل ${m.model}. وزني … وطولي …`)}">📏 مقاسي إيه؟</a></div><div class="sz"></div>
           <div class="hint" hidden></div>
           <div class="incart" hidden></div>
         </div>
-        <div class="post-a"><button class="btn add" type="button">ضيف للطلب</button></div>`;
+        <div class="post-a"><button class="btn add" type="button">ضيف للطلب</button></div>
+        <div class="post-t muted">${m.blurb}</div>`;
       const ph = el.querySelector(".ph"), sw = el.querySelector(".sw"), sz = el.querySelector(".sz"), hint = el.querySelector(".hint"), add = el.querySelector(".add"), inc = el.querySelector(".incart");
       let viewed = false;
       const firstTap = () => { if (!viewed) { viewed = true; track("ViewContent", { content_ids: [pk.color.sku], content_type: "product", value: m.price, currency: "EGP" }); } };
+      // The first model's photo is near the top of the page, so it must not wait for lazy loading
+      const eager = index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`;
       const photo = () => {
-        ph.innerHTML = pk.color.img
-          ? `<img src="${pk.color.img}" alt="${m.title} – ${pk.color.ar}" loading="lazy" width="900" height="1350">`
-          : `<div class="none">لسه ما صورناش اللون ${pk.color.ar}.<br>اطلب صورته على واتساب.</div>`;
+        ph.innerHTML = (pk.color.img
+          ? `<img src="${pk.color.img}" alt="${m.title} – ${pk.color.ar}" ${eager} width="900" height="1350">`
+          : `<div class="none">لسه ما صورناش اللون ${pk.color.ar}.<br>اطلب صورته على واتساب.</div>`)
+          + `<span class="badge">${money(m.price)} <small>جنيه</small></span>`;
       };
       const inCartLine = () => {
         const lines = S.cart.filter(i => i.model === m.model).map(i => `${i.color} ${i.size}${i.qty > 1 ? " ×" + i.qty : ""}`);
@@ -368,7 +394,7 @@
       el._refresh = () => { sizes(); inCartLine(); };
       colors(); sizes(); photo(); inCartLine();
       box.append(el);
-    }
+    });
   }
   const refreshFeed = () => document.querySelectorAll("#feed .card").forEach(c => c._refresh && c._refresh());
 
@@ -398,7 +424,9 @@
       `<div><span>الشحن</span><span>${z ? money(z.fee) + " جنيه" : "اختار المحافظة"}</span></div>` +
       `<div class="t"><span>الإجمالي</span><span>${money(sub + (z ? z.fee : 0))} جنيه</span></div>`;
   }
-  $("barGo").onclick = () => { track("InitiateCheckout", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: subtotal(), currency: "EGP", num_items: pieces() }); items(); show("checkout"); };
+  $("barGo").onclick = () => {
+    if (!pieces()) { goToModels(); return; }
+    track("InitiateCheckout", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: subtotal(), currency: "EGP", num_items: pieces() }); items(); show("checkout"); };
   $("addMore").onclick = () => history.back();
   $("showPhone2").onclick = () => { $("f-phone2").hidden = false; $("showPhone2").hidden = true; $("phone2").focus(); };
   $("showNotes").onclick = () => { $("f-notes").hidden = false; $("showNotes").hidden = true; $("notes").focus(); };
@@ -474,6 +502,14 @@
   // ---------- static parts ----------
   function staticParts() {
     const c = S.cat, p = c.policy || {}, zones = c.delivery.zones;
+    $("heroImg").src = c.hero;
+    $("fromPrice").textContent = money(Math.min(...c.models.map(m => m.price)));
+    $("modelCount").textContent = String(c.models.length).replace(/\d/g, d => AR[d]);
+    $("reassure").innerHTML = [
+      p.exchange === "customer_pays_delivery" ? "🔁 لو المقاس مش مظبوط تقدر تبدّله، وبتدفع الشحن بس" : "",
+      "📞 هنكلمك نأكد الطلب قبل الشحن",
+      c.shop && c.shop.address ? `📍 المحل: ${c.shop.address}` : "",
+    ].filter(Boolean).map(t => `<div>${t}</div>`).join("");
     $("trustOpen").hidden = !p.open_before_pay; $("bubbleOpen").hidden = !p.open_before_pay;
     $("trustShip").textContent = `شحن ${money(zones[0].fee)} جنيه لإسكندرية والقاهرة والدلتا · ${money(zones[1].fee)} لباقي المحافظات`;
     $("chatTop").href = waLink("السلام عليكم، عايز أسأل عن ترنجات روبست");
@@ -498,7 +534,7 @@
   fetch("catalog.json", { cache: "no-store" }).then(r => r.json()).then(cat => {
     S.cat = cat;
     if (cat.meta_pixel_id) loadPixel(cat.meta_pixel_id);
-    staticParts(); feed();
+    staticParts(); feed(); updateBar();
     history.replaceState({ view: "shop" }, "", location.pathname + location.search);
   }).catch(() => { $("feed").innerHTML = `<div class="card pad">حصلت مشكلة في تحميل الموديلات. ابعتلنا على واتساب.</div>`; });
 })();
