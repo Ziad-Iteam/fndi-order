@@ -81,11 +81,7 @@
       "badge": "ترشيحنا",
       "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-30-1518-CBFB51.jpg",
-      "video": {
-        "src": "img/v-25063.mp4",
-        "poster": "img/v-25063.jpg",
-        "caption": "فيديو حقيقي للموديل: علامة III والسوستة"
-      },
+      "video": null,
       "colors": [
         {
           "sku": "FNDI-25063-BST",
@@ -301,11 +297,7 @@
       "badge": null,
       "fabric": "خامة سوفت مبطن فولار مستورد",
       "hero": "img/bilal-24-1511-592255.jpg",
-      "video": {
-        "src": "img/v-25069.mp4",
-        "poster": "img/v-25069.jpg",
-        "caption": "فيديو حقيقي للموديل: البانل والخطوط"
-      },
+      "video": null,
       "colors": [
         {
           "sku": "FNDI-25069-NVY",

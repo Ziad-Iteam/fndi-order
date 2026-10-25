@@ -308,6 +308,18 @@
   const S = { cat: null, pick: {}, cart: [], view: "shop" };
   const params = new URLSearchParams(location.search);
   const TEST = params.has("test");
+  // Ad attribution: utm_source/utm_campaign/utm_content from the ad link (e.g. meta/c2/A1), kept for the
+  // whole visit; a Meta click without UTMs still shows as meta (fbclid). Stored with the order as `source`.
+  const AD = (() => {
+    const tag = [params.get("utm_source"), params.get("utm_campaign"), params.get("utm_content")]
+      .map(v => (v || "").replace(/[^\w.-]/g, "").slice(0, 40)).filter(Boolean).join("/")
+      || (params.has("fbclid") ? "meta" : "");
+    try {
+      if (tag) sessionStorage.setItem("fndi_ad", tag);
+      return tag || sessionStorage.getItem("fndi_ad") || "";
+    } catch (e) { return tag; }
+  })();
+  const adCode = (params.get("utm_content") || "").replace(/[^\w-]/g, "").slice(0, 12);
 
   // ---------- helpers ----------
   const waLink = text => "https://wa.me/" + S.cat.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
@@ -577,13 +589,15 @@
       `المحافظة: ${gov}`, `المنطقة: ${area}`, `العنوان: ${addr}`,
       $("notes").value.trim() ? `ملاحظة: ${$("notes").value.trim()}` : null,
       "الدفع عند الاستلام", S.cat.policy && S.cat.policy.open_before_pay ? "معاينة قبل الدفع" : null,
+      adCode ? `(${adCode})` : null,
     ].filter(Boolean);
     const link = waLink(lines.join("\n"));
     const order = {
       order_id: id,
       items: S.cart.map(i => ({ sku: i.sku, model: i.model, color: i.color, size: i.size, qty: i.qty, price_egp: i.price })),
       subtotal_egp: sub, delivery_fee_egp: z.fee, total_egp: total,
-      name, phone, phone2, governorate: gov, area, address: addr, notes: $("notes").value.trim(), source: location.hostname,
+      name, phone, phone2, governorate: gov, area, address: addr, notes: $("notes").value.trim(),
+      source: location.hostname + (AD ? "|" + AD : ""),
     };
     const btn = $("submitBtn"); btn.disabled = true; btn.textContent = "بنسجّل طلبك…";
     saveOrder(order).then(saved => {
