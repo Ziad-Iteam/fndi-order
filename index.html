@@ -335,9 +335,9 @@
   const subtotal = () => S.cart.reduce((a, i) => a + i.qty * i.price, 0);
   const arPieces = n => n === 1 ? "قطعة واحدة" : n === 2 ? "قطعتين" : `${n} قطع`;
   let toastTimer;
-  function toast(msg) {
+  function toast(msg, ms = 1800) {
     $("toastMsg").textContent = msg; $("toast").classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => $("toast").classList.remove("show"), 1800);
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => $("toast").classList.remove("show"), ms);
   }
   const stockOf = (color, size) => (color.sizes.find(s => s.size === size) || { qty: 0 }).qty;
   const inCart = (sku, size) => (S.cart.find(i => i.sku === sku && i.size === size) || { qty: 0 }).qty;
@@ -459,6 +459,39 @@
     });
   }
   const refreshFeed = () => document.querySelectorAll("#feed .card").forEach(c => c._refresh && c._refresh());
+
+  // Live stock from the orders Sheet: a size someone already ordered is held there, so it shows as sold out here.
+  // If the Sheet can't be reached, the page keeps the stock it was built with; the Sheet still refuses
+  // a sold-out size when the order is sent.
+  async function liveStock() {
+    const url = S.cat.order_endpoint;
+    if (!url) return;
+    const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 6000);
+    try {
+      const j = await (await fetch(url + "?stock=1", { cache: "no-store", signal: ctl.signal })).json();
+      if (j.ok && j.stock) applyStock(j.stock);
+    } catch (e) {} finally { clearTimeout(timer); }
+  }
+  // Returns the cart lines that had to shrink or go because their size is no longer there
+  function applyStock(avail) {
+    let changed = false;
+    for (const m of S.cat.models) {
+      for (const c of m.colors) for (const s of c.sizes) {
+        const k = c.sku + "|" + s.size, q = Math.min(avail[k], 3);
+        if (k in avail && q !== s.qty) { s.qty = q; s.available = q > 0; changed = true; }
+      }
+      m.available = m.colors.some(c => c.sizes.some(s => s.available));
+    }
+    const lost = [];
+    S.cart = S.cart.filter(i => {
+      i.max = stockOf(S.cat.models.find(m => m.model === i.model).colors.find(c => c.sku === i.sku), i.size);
+      if (i.qty > i.max) { lost.push(i); i.qty = i.max; }
+      return i.qty > 0;
+    });
+    // Redraw only when something changed, so the usual case (nothing sold since the last publish) doesn't flicker
+    if (changed || lost.length) { feed(); updateBar(); }
+    return lost;
+  }
 
   // ---------- viewer: every photo uncropped (selected color first), the real video, and the details ----------
   let V = null;
@@ -600,7 +633,17 @@
       source: location.hostname + (AD ? "|" + AD : ""),
     };
     const btn = $("submitBtn"); btn.disabled = true; btn.textContent = "بنسجّل طلبك…";
-    saveOrder(order).then(saved => {
+    saveOrder(order).then(res => {
+      if (res.error === "sold_out") {
+        // Someone ordered the last piece first: update the page and let the customer change the order
+        const lost = res.stock ? applyStock(res.stock) : [];
+        btn.disabled = false; btn.textContent = "تأكيد الطلب";
+        const names = lost.map(i => `${i.color} مقاس ${i.size}`).join("، ");
+        if (!S.cart.length) { show("shop"); toast(`للأسف ${names || "المقاس ده"} لسه خلص. اختار مقاس أو لون تاني`, 6000); return; }
+        items(); toast(`للأسف ${names || "مقاس في طلبك"} لسه خلص، شيلناه من طلبك. راجع الطلب وأكّد تاني`, 6000);
+        return;
+      }
+      const saved = res.ok === true;
       track("Lead", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: total, currency: "EGP", num_items: pieces() }, id);
       $("doneId").textContent = id;
       $("doneSummary").innerHTML = S.cart.map(i => `${i.title} – ${i.color} مقاس ${i.size} × ${i.qty}`).join("<br>") +
@@ -613,15 +656,16 @@
     });
   };
 
-  // Records the order in the owner's sheet; never blocks the order (resolves false on any failure).
+  // Records the order in the owner's sheet. Resolves to the Sheet's answer ({ok:true} or {ok:false, error}),
+  // or {ok:false} on any network failure; only error "sold_out" stops the order.
   async function saveOrder(order) {
     const url = S.cat.order_endpoint;
-    if (!url) return false;
+    if (!url) return { ok: false };
     const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 9000);
     try {
       const r = await fetch(url, { method: "POST", body: JSON.stringify(order), headers: { "Content-Type": "text/plain;charset=utf-8" }, signal: ctl.signal });
-      return (await r.json()).ok === true;
-    } catch (e) { return false; } finally { clearTimeout(timer); }
+      return await r.json();
+    } catch (e) { return { ok: false }; } finally { clearTimeout(timer); }
   }
   $("doneBack").onclick = () => { history.replaceState({ view: "shop" }, "", location.pathname + location.search); show("shop", false); };
 
@@ -662,6 +706,7 @@
     if (cat.meta_pixel_id) loadPixel(cat.meta_pixel_id);
     staticParts(); feed(); updateBar();
     history.replaceState({ view: "shop" }, "", location.pathname + location.search);
+    liveStock();
   }).catch(() => { $("feed").innerHTML = `<div class="card pad">حصلت مشكلة في تحميل الموديلات. ابعتلنا على واتساب.</div>`; });
 })();
 </script>
