@@ -81,7 +81,6 @@
   .hint { color: var(--err); font-size: 14px; font-weight: 600; margin-top: 6px; }
   .incart { margin-top: 8px; font-size: 14px; color: var(--wa); font-weight: 600; }
   .lbl.row { align-items: center; }
-  .szhelp { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--wa-soft); color: var(--wa); font-weight: 700; font-size: 14px; text-decoration: none; }
 
   .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 50px; border: 0; border-radius: 10px; background: var(--wa); color: #fff; font-weight: 800; font-size: 17px; cursor: pointer; text-decoration: none; }
   .btn:active { background: var(--wa-dark); }
@@ -212,10 +211,6 @@
 
   <div id="feed"></div>
 
-  <section class="card pad" id="sizeCard">
-    <div class="sec-t">مش عارف مقاسك؟</div>
-    <div id="sizeBox" class="muted"></div>
-  </section>
 
   <section class="card pad">
     <div class="sec-t">الشحن</div>
@@ -250,7 +245,7 @@
     <div class="f"><label for="gov">المحافظة</label><select id="gov"></select><div class="e" id="e-gov"></div></div>
     <div class="f"><label for="area">المنطقة</label><input id="area" placeholder="مثلاً: العجمي – البيطاش"><div class="e" id="e-area"></div></div>
     <div class="f"><label for="addr">العنوان بالتفصيل</label><textarea id="addr" autocomplete="street-address" placeholder="الشارع، رقم العمارة، الدور، وعلامة مميزة جنبك"></textarea><div class="e" id="e-addr"></div></div>
-    <div class="f" id="f-notes" hidden><label for="notes">ملاحظة <small>(اختياري)</small></label><input id="notes" placeholder="مثلاً: وزني ٩٠ وطولي ١٨٠، أو ميعاد مناسب"></div>
+    <div class="f" id="f-notes" hidden><label for="notes">ملاحظة <small>(اختياري)</small></label><input id="notes" placeholder="مثلاً: ميعاد مناسب للتوصيل"></div>
     <button class="more" type="button" id="showNotes">+ ضيف ملاحظة</button>
 
     <div class="totals" id="totals"></div>
@@ -388,7 +383,7 @@
         <div class="ph"></div>
         <div class="pad">
           <div class="lbl">اللون: <b class="cn"></b></div><div class="sw"></div>
-          <div class="lbl row"><span>المقاس</span><a class="szhelp" href="${waLink(`عايز أعرف مقاسي في ترنج روبست موديل ${m.model}. وزني … وطولي …`)}">📏 مقاسي إيه؟</a></div><div class="sz"></div>
+          <div class="lbl">المقاس</div><div class="sz"></div>
           <div class="hint" hidden></div>
           <div class="incart" hidden></div>
         </div>
@@ -684,16 +679,13 @@
     $("trustShip").textContent = `شحن ${money(zones[0].fee)} جنيه لإسكندرية والقاهرة والدلتا · ${money(zones[1].fee)} لباقي المحافظات`;
     $("chatTop").href = waLink("السلام عليكم، عايز أسأل عن ترنجات روبست");
     $("zones").innerHTML = zones.map(z => `<tr><td>${z.label}</td><td><b>${money(z.fee)} جنيه</b></td><td>${z.days}</td></tr>`).join("");
-    $("sizeBox").innerHTML = c.size_guide
-      ? `<table class="ship"><tr><th>الوزن</th><th>الطول</th><th>المقاس</th></tr>${c.size_guide.map(r => `<tr><td>${r.weight}</td><td>${r.height}</td><td><b>${r.size}</b></td></tr>`).join("")}</table>`
-      : `ابعتلنا وزنك وطولك على واتساب ونقولك المقاس اللي هيقعد عليك.<div style="margin-top:10px"><a class="btn ghost" href="${waLink("عايز أعرف مقاسي في ترنج روبست. وزني … وطولي …")}">ابعت وزنك وطولك</a></div>`;
     const shop = c.shop || {};
     $("shop-info").innerHTML = `<div class="sec-t">المحل</div>${shop.address ? `<div>📍 ${shop.address}</div>` : ""}${shop.hours ? `<div class="muted">🕛 ${shop.hours}</div>` : ""}<div style="margin-top:10px"><a class="btn ghost" href="${waLink()}">واتساب ${"0" + String(c.whatsapp).replace(/^20/, "")}</a></div>`;
     const faq = [
       ["ده روبست أصلي؟", "أيوه. الترنجات من مصنع روبست وعليها لوجو روبست، وإحنا محل في العجمي بنبيعها."],
       ["ليه السعر زي سعر موقع روبست؟", "ده سعر روبست الرسمي. الفرق إنك بتدفع عند الاستلام، وبتكلم محل حقيقي قبل وبعد الطلب."],
       p.open_before_pay ? ["أقدر أفتح الشحنة قبل ما أدفع؟", "أيوه، افتح وشوف الترنج قبل ما تدفع للمندوب."] : null,
-      ["لو المقاس طلع مش مظبوط؟", p.exchange === "customer_pays_delivery" ? `تقدر تبدّله، وبتدفع مصاريف الشحن بس (${zones.map(z => money(z.fee)).join(" أو ")} جنيه حسب محافظتك). والأحسن تبعتلنا وزنك وطولك قبل ما تطلب.` : "كلمنا على واتساب قبل ما تطلب ونساعدك تختار المقاس."],
+      ["لو المقاس طلع مش مظبوط؟", p.exchange === "customer_pays_delivery" ? `تقدر تبدّله، وبتدفع مصاريف الشحن بس (${zones.map(z => money(z.fee)).join(" أو ")} جنيه حسب محافظتك).` : "كلمنا على واتساب لو حابب تغيّر المقاس."],
       ["أطلب كذا قطعة مرة واحدة؟", "أيوه. ضيف كل قطعة للطلب، وكلهم بيوصلوا في شحنة واحدة بمصاريف شحن واحدة."],
       ["الطلب بيوصل إمتى؟", zones.map(z => `${z.label}: ${z.days}`).join(". ") + "."],
     ].filter(Boolean);
