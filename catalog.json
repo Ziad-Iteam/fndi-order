@@ -70,6 +70,7 @@
   "size_guide": null,
   "promo": null,
   "hero": "img/bilal-06-1517-D7C1-4.jpg",
+  "robust_checked": "2026-11-21",
   "meta_pixel_id": "1452835799541614",
   "order_endpoint": "https://script.google.com/macros/s/AKfycbzDgFWm2XTSH_CUHOGLEQlHKgOFOmA-JqpeUuxlZsFQzyMmqyQSkm-WpsIjE7rSOUwKSg/exec",
   "draft": false,
@@ -82,6 +83,7 @@
       "was": null,
       "badge": "ترشيحنا",
       "fabric": "خامة سوفت مبطن فولار مستورد",
+      "robust": 2510,
       "hero": "img/bilal-30-1518-CBFB51.jpg",
       "video": null,
       "colors": [
@@ -190,6 +192,7 @@
       "was": null,
       "badge": null,
       "fabric": "خامة سوفت مبطن فولار مستورد",
+      "robust": null,
       "hero": "img/bilal-06-1517-D7C1-4.jpg",
       "video": null,
       "colors": [
@@ -300,6 +303,7 @@
       "was": null,
       "badge": null,
       "fabric": "خامة سوفت مبطن فولار مستورد",
+      "robust": 2230,
       "hero": "img/bilal-24-1511-592255.jpg",
       "video": null,
       "colors": [
@@ -407,6 +411,7 @@
       "was": null,
       "badge": null,
       "fabric": "خامة سوفت مبطن فولار مستورد",
+      "robust": 2295,
       "hero": "img/bilal-11-1520-473D-4.jpg",
       "video": {
         "src": "img/v-25034.mp4",
@@ -519,6 +524,7 @@
       "was": null,
       "badge": null,
       "fabric": "خامة سوفت مبطن فولار مستورد",
+      "robust": 2295,
       "hero": "img/bilal-33-1609-1C65E0.jpg",
       "video": {
         "src": "img/v-25037.mp4",

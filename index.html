@@ -8,13 +8,18 @@
 <meta property="og:title" content="ترنجات روبست الشتوي الأصلية – FNDI العجمي">
 <meta property="og:description" content="الدفع عند الاستلام · افتح وشوف قبل ما تدفع · شحن لكل المحافظات">
 <meta property="og:image" content="img/bilal-30-1518-CBFB51.jpg">
-<meta name="theme-color" content="#008069">
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Store look (2026-11-21): dark header, Cairo, one strong order color (--cta) used only for ordering */
   :root {
-    --bg: #F0F2F5; --card: #FFFFFF; --ink: #050505; --sub: #65676B; --line: #E4E6EB;
-    --wa: #008069; --wa-dark: #006B58; --wa-soft: #E7F5F2; --bubble: #D9FDD3; --tick: #53BDEB;
-    --err: #D93025; --r: 10px;
-    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+    --bg: #F3F3F1; --card: #FFFFFF; --ink: #111111; --sub: #5F6368; --line: #E6E6E3;
+    --wa: #111111; --wa-dark: #000000; --wa-soft: #F1F1EF; --bubble: #F1F1EF; --tick: #1E8E3E;
+    --cta: #D9480F; --cta-dark: #B53A0B; --ok: #1E8E3E;
+    --err: #D93025; --r: 12px;
+    --font: "Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", Tahoma, Arial, sans-serif;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html { -webkit-text-size-adjust: 100%; }
@@ -45,7 +50,7 @@
   .hero-ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .hero h1 { font-size: 21px; line-height: 1.35; margin: 0 0 4px; }
   .hero-price { font-size: 17px; margin-bottom: 2px; }
-  .hero-price b { font-size: 24px; color: var(--wa); }
+  .hero-price > b { font-size: 26px; color: var(--ink); }
   .trust { display: grid; gap: 10px; }
   .trust div { display: flex; gap: 10px; align-items: center; font-size: 15px; font-weight: 600; }
   .trust.mini { grid-template-columns: repeat(3, 1fr); gap: 6px; border-top: 1px solid var(--line); padding: 10px 8px; }
@@ -77,16 +82,23 @@
   .sw button .noimg { aspect-ratio: 3 / 4; display: grid; place-items: center; background: #F0F2F5; font-size: 11px; color: var(--sub); }
   .sw button[aria-pressed="true"] { border-color: var(--wa); box-shadow: 0 0 0 1px var(--wa); }
   .sz { display: flex; gap: 8px; flex-wrap: wrap; }
-  .sz button { min-width: 60px; height: 46px; border: 2px solid var(--line); border-radius: 10px; background: #fff; font-weight: 700; font-size: 16px; cursor: pointer; direction: ltr; }
+  .sz button { min-width: 60px; min-height: 46px; border: 2px solid var(--line); border-radius: 10px; background: #fff; font-weight: 700; font-size: 16px; cursor: pointer; direction: ltr; }
   .sz button[aria-pressed="true"] { border-color: var(--wa); background: var(--wa); color: #fff; }
   .sz button:disabled { color: #BCC0C4; text-decoration: line-through; cursor: not-allowed; background: #F7F8FA; }
   .hint { color: var(--err); font-size: 14px; font-weight: 600; margin-top: 6px; }
   .incart { margin-top: 8px; font-size: 14px; color: var(--wa); font-weight: 600; }
   .lbl.row { align-items: center; }
 
-  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 50px; border: 0; border-radius: 10px; background: var(--wa); color: #fff; font-weight: 800; font-size: 17px; cursor: pointer; text-decoration: none; }
-  .btn:active { background: var(--wa-dark); }
-  .btn.ghost { background: var(--wa-soft); color: var(--wa); }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 52px; border: 0; border-radius: 12px; background: var(--cta); color: #fff; font-weight: 800; font-size: 18px; cursor: pointer; text-decoration: none; }
+  .btn:active { background: var(--cta-dark); }
+  .btn.ghost { background: var(--wa-soft); color: var(--ink); }
+  .btn2 { display: block; width: 100%; margin-top: 8px; min-height: 44px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); font-weight: 700; font-size: 15px; cursor: pointer; }
+  .cmp { font-size: 13.5px; color: var(--sub); margin-top: 2px; }
+  .cmp b, .hero-price .cmp b { color: var(--ok); font-size: inherit; }
+  .sz button small { display: block; font-size: 10.5px; font-weight: 700; color: var(--cta); line-height: 1; margin-top: 2px; }
+  .sz button[aria-pressed="true"] small { color: #fff; }
+  .sizehelp { font-size: 13.5px; color: var(--sub); margin-top: 8px; }
+  .shipline { font-size: 14px; color: var(--ok); font-weight: 700; margin-top: 2px; }
   .btn:disabled { background: #BCC0C4; cursor: not-allowed; }
   .post-a { padding: 12px 14px 14px; }
 
@@ -187,10 +199,6 @@
     </button>
     <div class="avatar">FNDI</div>
     <div class="who"><b id="hdrTitle">FNDI العجمي</b><span id="hdrSub">ترنجات روبست الشتوي الأصلية</span></div>
-    <a class="chatbtn" id="chatTop" href="#">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg>
-      اسألنا
-    </a>
   </div>
 </header>
 
@@ -199,10 +207,10 @@
   <section class="card hero">
     <div class="hero-ph"><img id="heroImg" alt="ترنجات روبست بكابيشون بتلات ألوان" width="900" height="1350" loading="eager" fetchpriority="high"></div>
     <div class="pad">
-      <h1>ترنجات روبست الأصلية – <span id="modelCount">5</span> موديلات</h1>
+      <h1 id="heroH1">ترنجات روبست الأصلية – <span id="modelCount">5</span> موديلات</h1>
       <div class="hero-price" id="heroPrice"></div>
-      <div class="muted">ألوان كتير · مقاسات من L لحد 3XL · تقدر تطلب أكتر من قطعة</div>
-      <button class="btn" type="button" id="heroGo" style="margin-top:12px">اختار موديلك</button>
+      <div class="muted" id="heroSub">ألوان كتير · مقاسات من L لحد 3XL · تقدر تطلب أكتر من قطعة</div>
+      <button class="btn" type="button" id="heroGo" style="margin-top:12px">اختار لونك ومقاسك</button>
     </div>
     <div class="trust mini">
       <div><span class="ico">💵</span>الدفع كاش للمندوب</div>
@@ -270,10 +278,10 @@
   </section>
   <section class="card pad">
     <div class="bubble" id="doneSummary"></div>
-    <p style="margin:12px 0 0">هنكلمك على الموبايل أو واتساب عشان نأكد قبل الشحن. الدفع كاش للمندوب لما الطلب يوصلك.</p>
+    <p style="margin:12px 0 0">📞 هنكلمك على رقمك خلال ساعتين (من ١٢ الضهر لـ ١٢ بالليل) عشان نأكد قبل الشحن. خلي موبايلك جنبك.</p>
+    <p style="margin:6px 0 0">💵 الدفع كاش للمندوب لما الطلب يوصلك، وتقدر تفتح وتشوف قبل ما تدفع.</p>
   </section>
   <section class="card pad" style="display:grid;gap:10px">
-    <a class="btn" id="doneWa" href="#">ابعتلنا على واتساب لتأكيد أسرع</a>
     <button class="btn ghost" type="button" id="doneBack">رجوع للموديلات</button>
   </section>
 </main>
@@ -317,6 +325,8 @@
     } catch (e) { return tag; }
   })();
   const adCode = (params.get("utm_content") || "").replace(/[^\w-]/g, "").slice(0, 12);
+  // ?m=25063 from the ad: open on the model the ad showed (its photo in the hero, its card first)
+  const FOCUS = (params.get("m") || "").replace(/\D/g, "").slice(0, 6);
 
   // ---------- helpers ----------
   const waLink = text => "https://wa.me/" + S.cat.whatsapp + (text ? "?text=" + encodeURIComponent(text) : "");
@@ -381,18 +391,21 @@
       const el = document.createElement("article");
       el.className = "card";
       el.innerHTML = `
-        <div class="post-h"><div class="avatar">FNDI</div><div><b>${m.title}</b><span>موديل ${m.model} · روبست</span></div></div>
+        <div class="post-h"><div class="avatar">FNDI</div><div><b>${m.title}</b><span>موديل ${m.model} · روبست الأصلي</span></div></div>
         <div class="ph"></div>
         <div class="pad">
+          <div class="price">${money(m.price)} <small>جنيه</small></div>
+          ${m.robust ? `<div class="cmp">على موقع روبست الرسمي بـ ${money(m.robust)} جنيه · <b>أرخص بـ ${money(m.robust - m.price)} جنيه</b></div>` : ""}
           <div class="lbl">اللون: <b class="cn"></b></div><div class="sw"></div>
           <div class="lbl">المقاس</div><div class="sz"></div>
           <div class="hint" hidden></div>
+          <div class="sizehelp">مش متأكد من مقاسك؟ اختار الأقرب، وهنأكد معاك في المكالمة قبل الشحن.</div>
           <div class="incart" hidden></div>
         </div>
-        <div class="post-a"><button class="btn add" type="button">ضيف للطلب</button></div>
+        <div class="post-a"><button class="btn add" type="button">اطلب دلوقتي</button><button class="btn2 addonly" type="button">ضيفه للطلب وكمّل تسوق</button></div>
         <button class="linkbtn details" type="button">📷 شوف كل الصور${m.video ? " والفيديو" : ""} والتفاصيل</button>
         <div class="post-t muted">${m.blurb}</div>`;
-      const ph = el.querySelector(".ph"), sw = el.querySelector(".sw"), sz = el.querySelector(".sz"), hint = el.querySelector(".hint"), add = el.querySelector(".add"), inc = el.querySelector(".incart");
+      const ph = el.querySelector(".ph"), sw = el.querySelector(".sw"), sz = el.querySelector(".sz"), hint = el.querySelector(".hint"), add = el.querySelector(".add"), addOnly = el.querySelector(".addonly"), inc = el.querySelector(".incart");
       let viewed = false;
       const firstTap = () => { if (!viewed) { viewed = true; track("ViewContent", { content_ids: [pk.color.sku], content_type: "product", value: m.price, currency: "EGP" }); } };
       // The first model's photo is near the top of the page, so it must not wait for lazy loading
@@ -418,15 +431,16 @@
         for (const s of pk.color.sizes) {
           const left = s.qty - inCart(pk.color.sku, s.size);
           const b = document.createElement("button");
-          b.type = "button"; b.textContent = s.size; b.disabled = !s.available || left <= 0;
+          // "آخر قطعة" only when the stock tab really has one left (honest scarcity, never a made-up count)
+          b.type = "button"; b.innerHTML = s.size + (s.available && left === 1 ? "<small>آخر قطعة</small>" : ""); b.disabled = !s.available || left <= 0;
           b.setAttribute("aria-pressed", String(pk.size === s.size));
           if (b.disabled) b.setAttribute("aria-label", `${s.size} خلص`);
           b.onclick = () => { pk.size = s.size; hint.hidden = true; firstTap(); sizes(); };
           sz.append(b);
         }
         if (pk.size && (stockOf(pk.color, pk.size) - inCart(pk.color.sku, pk.size)) <= 0) pk.size = null;
-        add.disabled = !m.available;
-        add.textContent = m.available ? "ضيف للطلب" : "خلص من المحل";
+        add.disabled = !m.available; addOnly.hidden = !m.available;
+        add.textContent = m.available ? "اطلب دلوقتي" : "خلص من المحل";
       };
       const colors = () => {
         sw.innerHTML = "";
@@ -440,16 +454,20 @@
           sw.append(b);
         }
       };
-      add.onclick = () => {
-        if (!pk.size) { hint.textContent = "اختار المقاس الأول ☝️"; hint.hidden = false; sz.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+      // Returns true when the picked size is (now) in the order
+      const addPicked = () => {
+        if (!pk.size) { hint.textContent = "اختار المقاس الأول ☝️"; hint.hidden = false; sz.scrollIntoView({ block: "center", behavior: "smooth" }); return false; }
         const max = stockOf(pk.color, pk.size);
         const line = S.cart.find(i => i.sku === pk.color.sku && i.size === pk.size);
-        if (line) { if (line.qty >= max) { toast("مفيش أكتر من كده من المقاس ده"); return; } line.qty++; }
+        if (line) { if (line.qty >= max) { toast("مفيش أكتر من كده من المقاس ده"); return false; } line.qty++; }
         else S.cart.push({ sku: pk.color.sku, model: m.model, title: m.title, color: pk.color.ar, size: pk.size, qty: 1, price: m.price, img: pk.color.img, max });
         track("AddToCart", { content_ids: [pk.color.sku], content_type: "product", value: m.price, currency: "EGP" });
-        toast(`✓ اتضاف للطلب: ${pk.color.ar} مقاس ${pk.size}`);
         pk.size = null; sizes(); inCartLine(); updateBar();
+        return true;
       };
+      // Main button: straight to the order form (most orders are one piece)
+      add.onclick = () => { if (addPicked()) goCheckout(); };
+      addOnly.onclick = () => { const c = pk.color.ar, s = pk.size; if (addPicked()) toast(`✓ اتضاف للطلب: ${c} مقاس ${s}`); };
       el._refresh = () => { sizes(); inCartLine(); };
       colors(); sizes(); photo(); inCartLine();
       box.append(el);
@@ -578,9 +596,10 @@
       `<div><span>الشحن</span><span>${z ? money(z.fee) + " جنيه" : "اختار المحافظة"}</span></div>` +
       `<div class="t"><span>الإجمالي</span><span>${money(sub + (z ? z.fee : 0))} جنيه</span></div>`;
   }
-  $("barGo").onclick = () => {
-    if (!pieces()) { goToModels(); return; }
-    track("InitiateCheckout", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: subtotal(), currency: "EGP", num_items: pieces() }); items(); show("checkout"); };
+  function goCheckout() {
+    track("InitiateCheckout", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: subtotal(), currency: "EGP", num_items: pieces() }); items(); show("checkout");
+  }
+  $("barGo").onclick = () => { if (!pieces()) { goToModels(); return; } goCheckout(); };
   $("addMore").onclick = () => history.back();
   $("showPhone2").onclick = () => { $("f-phone2").hidden = false; $("showPhone2").hidden = true; $("phone2").focus(); };
   $("showNotes").onclick = () => { $("f-notes").hidden = false; $("showNotes").hidden = true; $("notes").focus(); };
@@ -641,11 +660,13 @@
         return;
       }
       const saved = res.ok === true;
-      track("Lead", { content_ids: S.cart.map(i => i.sku), content_type: "product", value: total, currency: "EGP", num_items: pieces() }, id);
+      const ev = { content_ids: S.cart.map(i => i.sku), content_type: "product", value: total, currency: "EGP", num_items: pieces() };
+      track("Lead", ev, id);
+      // Purchase = a COD order placed (not yet paid); lets Meta learn which visitors order
+      if (saved) track("Purchase", ev, id + "-p");
       $("doneId").textContent = id;
       $("doneSummary").innerHTML = S.cart.map(i => `${i.title} – ${i.color} مقاس ${i.size} × ${i.qty}`).join("<br>") +
         `<br><b>الإجمالي ${money(total)} جنيه شامل الشحن</b> <span class="tk">✓✓</span>`;
-      $("doneWa").href = link;
       S.cart = []; btn.disabled = false; btn.textContent = "تأكيد الطلب";
       history.replaceState({ view: "done" }, "", "#done"); show("done", false); refreshFeed();
       // If the order could not be saved, WhatsApp is the only record, so open it for the customer.
@@ -669,12 +690,22 @@
   // ---------- static parts ----------
   function staticParts() {
     const c = S.cat, p = c.policy || {}, zones = c.delivery.zones;
-    $("heroImg").src = c.hero;
+    const focus = FOCUS && c.models[0].model === FOCUS ? c.models[0] : null;
+    $("heroImg").src = focus ? focus.hero : c.hero;
     const prices = c.models.map(m => m.price), low = Math.min(...prices);
-    $("heroPrice").innerHTML = (prices.every(p => p === low) ? `أي موديل بـ <b>${money(low)}</b> جنيه` : `من <b>${money(low)}</b> جنيه`)
+    const rob = c.models.map(m => m.robust).filter(Boolean);
+    const z0 = zones[0];
+    $("heroPrice").innerHTML = (focus ? `<b>${money(focus.price)}</b> جنيه` : prices.every(p => p === low) ? `أي موديل بـ <b>${money(low)}</b> جنيه` : `من <b>${money(low)}</b> جنيه`)
       + (c.models.some(m => m.was) ? (was => ` <span class="muted">بدل ${money(Math.min(...was))}–${money(Math.max(...was))}</span>`)(c.models.filter(m => m.was).map(m => m.was)) : "")
+      + (focus && focus.robust ? `<div class="cmp">نفس الموديل على موقع روبست الرسمي بـ ${money(focus.robust)} · <b>أرخص بـ ${money(focus.robust - focus.price)} جنيه</b></div>`
+        : !focus && rob.length ? `<div class="cmp">على موقع روبست الرسمي من ${money(Math.min(...rob))} لـ ${money(Math.max(...rob))} جنيه</div>` : "")
+      + `<div class="shipline">${money((focus || c.models[0]).price + z0.fee)} جنيه شامل الشحن لإسكندرية والقاهرة والدلتا</div>`
       + (c.promo ? `<div class="promo-l">🔥 ${c.promo.label}</div>` : "");
     $("modelCount").textContent = c.models.length;
+    if (focus) {
+      $("heroH1").textContent = `ترنج روبست ${focus.title.replace(/^ترنج روبست\s*/, "")}`;
+      $("heroSub").textContent = `موديل ${focus.model} · ${focus.colors.length} ألوان · من L لحد 3XL · وفيه ${c.models.length - 1} موديلات تانية تحت`;
+    }
     $("reassure").innerHTML = [
       p.exchange === "customer_pays_delivery" ? "🔁 لو المقاس مش مظبوط تقدر تبدّله، وبتدفع الشحن بس" : "",
       "📞 هنكلمك نأكد الطلب قبل الشحن",
@@ -682,13 +713,13 @@
     ].filter(Boolean).map(t => `<div>${t}</div>`).join("");
     $("trustOpen").hidden = !p.open_before_pay; $("bubbleOpen").hidden = !p.open_before_pay;
     $("trustShip").textContent = `شحن ${money(zones[0].fee)} جنيه لإسكندرية والقاهرة والدلتا · ${money(zones[1].fee)} لباقي المحافظات`;
-    $("chatTop").href = waLink("السلام عليكم، عايز أسأل عن ترنجات روبست");
     $("zones").innerHTML = zones.map(z => `<tr><td>${z.label}</td><td><b>${money(z.fee)} جنيه</b></td><td>${z.days}</td></tr>`).join("");
     const shop = c.shop || {};
-    $("shop-info").innerHTML = `<div class="sec-t">المحل</div>${shop.address ? `<div>📍 ${shop.address}</div>` : ""}${shop.hours ? `<div class="muted">🕛 ${shop.hours}</div>` : ""}<div style="margin-top:10px"><a class="btn ghost" href="${waLink()}">واتساب ${"0" + String(c.whatsapp).replace(/^20/, "")}</a></div>`;
+    $("shop-info").innerHTML = `<div class="sec-t">المحل</div><div>محل حقيقي بيبيع روبست الأصلي في إسكندرية، وتقدر تيجي تشوف بنفسك.</div>${shop.address ? `<div style="margin-top:6px">📍 ${shop.address}</div>` : ""}${shop.hours ? `<div class="muted">🕛 ${shop.hours}</div>` : ""}${shop.map_url ? `<div style="margin-top:10px"><a class="btn ghost" href="${shop.map_url}" target="_blank" rel="noopener">افتح المحل على الخريطة</a></div>` : ""}`;
+    const rb = c.models.filter(m => m.robust);
     const faq = [
       ["ده روبست أصلي؟", "أيوه. الترنجات من مصنع روبست وعليها لوجو روبست، وإحنا محل في العجمي بنبيعها."],
-      ["ليه السعر زي سعر موقع روبست؟", "ده سعر روبست الرسمي. الفرق إنك بتدفع عند الاستلام، وبتكلم محل حقيقي قبل وبعد الطلب."],
+      rb.length ? ["ليه أرخص من موقع روبست؟", `إحنا محل بنبيع بسعرنا: ${money(low)} جنيه لأي موديل. نفس الموديلات على موقع روبست الرسمي من ${money(Math.min(...rb.map(m => m.robust)))} لـ ${money(Math.max(...rb.map(m => m.robust)))} جنيه${c.robust_checked ? ` (شفنا الأسعار دي على موقعهم يوم ${c.robust_checked.split("-").reverse().join("/")})` : ""}. وكمان بتدفع عند الاستلام وتفتح وتشوف قبل ما تدفع.`] : null,
       p.open_before_pay ? ["أقدر أفتح الشحنة قبل ما أدفع؟", "أيوه، افتح وشوف الترنج قبل ما تدفع للمندوب."] : null,
       ["لو المقاس طلع مش مظبوط؟", p.exchange === "customer_pays_delivery" ? `تقدر تبدّله، وبتدفع مصاريف الشحن بس (${zones.map(z => money(z.fee)).join(" أو ")} جنيه حسب محافظتك).` : "كلمنا على واتساب لو حابب تغيّر المقاس."],
       ["أطلب كذا قطعة مرة واحدة؟", "أيوه. ضيف كل قطعة للطلب، وكلهم بيوصلوا في شحنة واحدة بمصاريف شحن واحدة."],
@@ -700,6 +731,8 @@
 
   fetch("catalog.json", { cache: "no-store" }).then(r => r.json()).then(cat => {
     S.cat = cat;
+    const fi = cat.models.findIndex(m => m.model === FOCUS);
+    if (fi > 0) cat.models.unshift(...cat.models.splice(fi, 1));
     if (cat.meta_pixel_id) loadPixel(cat.meta_pixel_id);
     staticParts(); feed(); updateBar();
     history.replaceState({ view: "shop" }, "", location.pathname + location.search);
