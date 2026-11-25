@@ -282,6 +282,7 @@
     <p style="margin:6px 0 0">💵 الدفع كاش للمندوب لما الطلب يوصلك، وتقدر تفتح وتشوف قبل ما تدفع.</p>
   </section>
   <section class="card pad" style="display:grid;gap:10px">
+    <a class="btn2" id="doneWa" href="#" target="_blank" rel="noopener" style="text-align:center;line-height:1.4;padding:11px 10px;text-decoration:none" hidden>ابعتلنا الطلب على واتساب (اختياري)</a>
     <button class="btn ghost" type="button" id="doneBack">رجوع للموديلات</button>
   </section>
 </main>
@@ -665,6 +666,8 @@
       // Purchase = a COD order placed (not yet paid); lets Meta learn which visitors order
       if (saved) track("Purchase", ev, id + "-p");
       $("doneId").textContent = id;
+      // Optional: the order is already saved; this only lets the customer message us if they want to.
+      $("doneWa").href = link; $("doneWa").hidden = !saved;
       $("doneSummary").innerHTML = S.cart.map(i => `${i.title} – ${i.color} مقاس ${i.size} × ${i.qty}`).join("<br>") +
         `<br><b>الإجمالي ${money(total)} جنيه شامل الشحن</b> <span class="tk">✓✓</span>`;
       S.cart = []; btn.disabled = false; btn.textContent = "تأكيد الطلب";
